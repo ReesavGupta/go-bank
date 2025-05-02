@@ -12,6 +12,11 @@ func main() {
 		os.Exit(0)
 	}
 
+	if err := store.Init(); err != nil {
+		log.Fatal("Something crashed when creating the table:", err)
+		os.Exit(0)
+	}
+
 	//	fmt.Printf("%+v\n", store) // %v+\n gives super verbose output :D
 	server := NewApiServer(":3000", store)
 	server.Run()

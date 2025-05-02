@@ -38,12 +38,7 @@ func NewPostgresStore() (*PostgresStore, error) {
 }
 
 func (s *PostgresStore) Init() error {
-	err := s.CreateAccountTable()
-	if err != nil {
-		return err
-	}
-	log.Printf("table create sucessfully")
-	return nil
+	return s.CreateAccountTable()
 }
 func (s *PostgresStore) CreateAccountTable() error {
 	query := `create table if not exists account (
@@ -56,10 +51,6 @@ func (s *PostgresStore) CreateAccountTable() error {
 	)`
 	_, err := s.db.Exec(query)
 
-	if err != nil {
-		// log.Println("could not execute query : ", err)
-		return err
-	}
 	return err
 }
 
